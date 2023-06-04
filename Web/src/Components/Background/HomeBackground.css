@@ -1,0 +1,69 @@
+.landingPageBackground {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+    background: linear-gradient(90deg, #D496A0 0%, #5A69B3 100%);
+    clip-path: polygon(0% 0%, 100% 0%, 100% 36%, 0% 93%);
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0; /* Początkowa wartość przezroczystości */
+    }
+    100% {
+        opacity: 0.8; /* Końcowa wartość przezroczystości */
+    }
+}
+
+
+.landingPageBackground::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("../../Assets/backgroundHome.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    mix-blend-mode: darken;
+    opacity: 0; /* Ustawienie początkowej wartości przezroczystości na 0 */
+    animation: fade-in 3s ease forwards; /* Dodanie animacji fade-in */
+
+    mask-image: linear-gradient(
+            to bottom,
+            transparent 0%,
+            rgba(0, 0, 0, 0.4) 10%,
+            rgba(0, 0, 0, 0.4) 90%,
+            transparent 100%
+    );
+    -webkit-mask-composite: destination-out;
+    mask-composite: exclude;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 36%, 0% 93%);
+    z-index: -1;
+}
+
+
+.logo{
+    position: absolute;
+    left: 65%;
+    top: 6.25%;
+}
+
+.text1{
+    margin-left: 5%;
+    margin-right: 50%;
+    font-size: 40px;
+    color: white;
+}
+
+.text2{
+    position: absolute;
+    font-size: 40px;
+    padding-right: 5%;
+    right: 0;
+    top: 70%;
+}

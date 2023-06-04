@@ -1,0 +1,169 @@
+.registerBackground {
+    top: 0;
+    right: 0;
+    position: absolute;
+    width: 60%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+    background: linear-gradient(180deg, #D496A0 0%, #5A69B3 100%) top right;
+    clip-path: polygon(100% 100%, 100% 0%, 0% 0%, 60% 100%);
+
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
+.registerBackground::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("../../Assets/backgroundRegister.png");
+    background-repeat: no-repeat;
+    mix-blend-mode: darken;
+    opacity: 0;
+    animation: fade-in 2s ease forwards;
+}
+
+.registerBackground:after {
+    content: "";
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    background-image: url("../../Assets/registerPath.svg");
+    background-repeat: no-repeat;
+    transform: scale(120%);
+    opacity: 0;
+    animation: fade-in 2s ease forwards 1s;
+}
+
+
+.registerContainer {
+    width: 60%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.registerText {
+    font-size: 70px;
+    margin-bottom: 20px;
+}
+
+.registerForm {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto 1fr;
+    width: 80%;
+    margin: 0 auto;
+    gap: 20px;
+}
+
+.registerForm h2{
+    font-size: 30px;
+    line-height: 15px;
+    margin-bottom: 0;
+    margin-left: 25px;
+}
+
+.col h2{
+    margin-top: 60px;
+}
+
+
+.col2 {
+    grid-column: 1 / span 2;
+    display: flex;
+    justify-content: center;
+}
+label{
+    font-size: 20px;
+}
+
+.col3{
+    margin-top: 80px;
+    grid-column: 1 / span 2;
+    display: flex;
+    justify-content: center;
+}
+
+.col4{
+    grid-column: 1 / span 2;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    min-height: 90px;
+}
+
+.col4 a {
+    font-size: 40px;
+    text-decoration: none;
+    color: #5A69B3;
+}
+
+
+.back{
+    margin-right: 500px;
+    align-self: center;
+}
+
+.inputField {
+    z-index: 0;
+    border-radius: 50px;
+    border-color: #5A69B3;
+    border-width: 1px;
+    padding: 20px;
+    width: 90%;
+    margin-top: 0;
+    outline: none;
+}
+
+
+input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #5A69B3;
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+input[type="checkbox"]::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #5A69B3;
+    border-radius: 2px;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.3s ease;
+}
+
+input[type="checkbox"]:checked::before {
+    transform: scaleX(1);
+}
+
+
