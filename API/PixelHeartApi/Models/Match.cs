@@ -16,6 +16,9 @@ namespace PixelHeartApi.Models
         [ForeignKey("SexId")]
         public User Sex { get; set; }
 
+        public bool IsInterested { get; set; }
+        public bool AreMatched { get; set; } = false;
+
         [Required]
         public string MessagesJson { get; set; } = string.Empty;
     }

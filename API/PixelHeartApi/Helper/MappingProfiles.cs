@@ -13,6 +13,8 @@ namespace PixelHeartApi.Helper
             CreateMap<GameDto,Game>();
             CreateMap<Skill,SkillDto>();
             CreateMap<SkillDto,Skill>();
+            CreateMap<Match,MatchDto>();
+            CreateMap<MatchDto,Match>();
         }
     }
 }

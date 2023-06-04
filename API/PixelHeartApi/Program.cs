@@ -13,6 +13,7 @@ builder.Services.AddDbContext<DatabaseContext>(opt => opt.UseSqlServer(builder.C
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IGameRepository, GameRepository>();
 builder.Services.AddScoped<ISkillRepository, SkillRepository>();
+builder.Services.AddScoped<IMatchRepository, MatchRepository>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

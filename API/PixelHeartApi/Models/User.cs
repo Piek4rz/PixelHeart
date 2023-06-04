@@ -18,6 +18,7 @@ namespace PixelHeartApi.Models
 
         public string Backstory { get; set; } = string.Empty;
 
+        public string Photo { get; set; } = string.Empty;
 
         public ICollection<UserSkill> UserSkills { get; set; }
 

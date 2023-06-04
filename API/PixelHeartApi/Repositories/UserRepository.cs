@@ -57,6 +57,7 @@ namespace PixelHeartApi.Repositories
             userToUpdate.Age = user.Age;
             userToUpdate.Email = user.Email;
             userToUpdate.Backstory = user.Backstory;
+            userToUpdate.Photo = user.Photo;
 
             context.SaveChanges();
 

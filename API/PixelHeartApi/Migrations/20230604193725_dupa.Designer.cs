@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PixelHeartApi.Data;
 
@@ -11,9 +12,11 @@ using PixelHeartApi.Data;
 namespace PixelHeartApi.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230604193725_dupa")]
+    partial class dupa
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -74,7 +77,7 @@ namespace PixelHeartApi.Migrations
 
                     b.HasIndex("UserId1");
 
-                    b.ToTable("Matches");
+                    b.ToTable("Match");
                 });
 
             modelBuilder.Entity("PixelHeartApi.Models.Skill", b =>

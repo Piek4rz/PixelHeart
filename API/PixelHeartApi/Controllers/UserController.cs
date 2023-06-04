@@ -21,12 +21,14 @@ namespace PixelHeartApi.Controllers
         public readonly IMapper _mapper;
         public readonly IGameRepository _gameRepository;
         public readonly ISkillRepository _skillRepository;
-        public UserController(IUserRepository userRepository, IMapper mapper, IGameRepository gameRepository, ISkillRepository skillRepository)
+        public readonly IMatchRepository _matchRepository;
+        public UserController(IUserRepository userRepository, IMapper mapper, IGameRepository gameRepository, ISkillRepository skillRepository, IMatchRepository matchRepository)
         {
             _userRepository = userRepository;
             _gameRepository = gameRepository;
             _mapper = mapper;
             _skillRepository = skillRepository;
+            _matchRepository = matchRepository;
         }
         [HttpGet("{id:int}")]
         public IActionResult GetUserById(int id)
@@ -233,6 +235,55 @@ namespace PixelHeartApi.Controllers
             _userRepository.DeleteUserGame(userId, gameId);
             return Ok();
         }
-        
+
+        //Match related
+        [HttpPost("{userId:int}/match/{sexId:int}")]
+        public IActionResult createMatch(int userId, int sexId, bool interested)
+        {
+            var user = _userRepository.GetById(userId);
+            if (user is null)
+            {
+                return NotFound();
+            } 
+            var user2 = _userRepository.GetById(sexId);
+            if (user2 is null)
+            {
+                return NotFound();
+            }
+            /*if (_userRepository.skillRelationExists(userId, skillId))
+            {
+                return BadRequest("Relacja juz istnieje!");
+            }*/
+            if (user.Matches == null)
+            {
+                user.Matches = new List<Match>();
+            }
+            if (user2.Matches == null)
+            {
+                user2.Matches = new List<Match>();
+            }
+            var match = new Match { UserId = userId, SexId = sexId, IsInterested = interested };
+            user.Matches.Add(match);
+            user2.Matches.Add(match);
+            _userRepository.SaveChanges();
+            return Ok();
+        }
+        [HttpPost("{userId:int}/setmatch/{sexId:int}")]
+        public IActionResult setMatched(int userId, int sexId)
+        {
+            var user = _userRepository.GetById(userId);
+            if (user is null)
+            {
+                return NotFound();
+            }
+            var user2 = _userRepository.GetById(sexId);
+            if (user2 is null)
+            {
+                return NotFound();
+            }
+            var isMatched = _matchRepository.setMatched(userId, sexId);
+            return Ok(isMatched);
+        }
+
     }
 }
