@@ -80,7 +80,7 @@ namespace PixelHeartApi.Controllers
             return NoContent();
         }
         [HttpDelete("{id:int}")]
-        public IActionResult DeleteUser(int id) 
+        public IActionResult DeleteUser(int id)
         {
             var isSuccess = _userRepository.Delete(id);
             if (!isSuccess)
@@ -130,11 +130,11 @@ namespace PixelHeartApi.Controllers
             {
                 return BadRequest("Nieprawidłowy token: " + ex.Message);
             }
-            
+
         }
 
         [HttpPost("{userId:int}/Game/{gameId:int}")]
-        public IActionResult addGame(int userId,int gameId) 
+        public IActionResult addGame(int userId, int gameId)
         {
             var user = _userRepository.GetById(userId);
             if (user is null)
@@ -142,7 +142,7 @@ namespace PixelHeartApi.Controllers
                 return NotFound();
             }
             var game = _gameRepository.GetById(gameId);
-            if(game is null)
+            if (game is null)
             {
                 return NotFound();
             }
@@ -158,16 +158,16 @@ namespace PixelHeartApi.Controllers
             {
                 game.UserGames = new List<UserGame>();
             }
-            
-            var userGame = new UserGame { UserId=userId, GameId=gameId };
+
+            var userGame = new UserGame { UserId = userId, GameId = gameId };
             user.UserGames.Add(userGame);
             game.UserGames.Add(userGame);
             _userRepository.SaveChanges();
-                        
+
             return Ok();
         }
         [HttpPost("{userId:int}/Skill/{skillId:int}")]
-        public IActionResult addSkill(int userId, int skillId,int lvl)
+        public IActionResult addSkill(int userId, int skillId, int lvl)
         {
             var user = _userRepository.GetById(userId);
             if (user is null)
@@ -191,7 +191,7 @@ namespace PixelHeartApi.Controllers
             {
                 skill.UserSkills = new List<UserSkill>();
             }
-            var userSkill = new UserSkill { UserId = userId, SkillId = skillId, Lvl=lvl};
+            var userSkill = new UserSkill { UserId = userId, SkillId = skillId, Lvl = lvl };
             user.UserSkills.Add(userSkill);
             skill.UserSkills.Add(userSkill);
             _userRepository.SaveChanges();
@@ -212,7 +212,7 @@ namespace PixelHeartApi.Controllers
         public IActionResult getUserGames(int userId)
         {
             var user = _userRepository.GetById(userId);
-            if(user is null)
+            if (user is null)
             {
                 return BadRequest("Nie ma takiego użytkownika!");
             }
@@ -221,9 +221,9 @@ namespace PixelHeartApi.Controllers
             return Ok(games);
         }
         [HttpDelete("{userId:int}/game/{gameId:int}")]
-        public IActionResult deleteUserGame(int userId,int gameId)
+        public IActionResult deleteUserGame(int userId, int gameId)
         {
-            if(_userRepository.GetById(userId) is null)
+            if (_userRepository.GetById(userId) is null)
             {
                 return BadRequest("Nie ma takiego usera!");
             }
@@ -244,7 +244,7 @@ namespace PixelHeartApi.Controllers
             if (user is null)
             {
                 return NotFound();
-            } 
+            }
             var user2 = _userRepository.GetById(sexId);
             if (user2 is null)
             {
@@ -266,9 +266,15 @@ namespace PixelHeartApi.Controllers
             user.Matches.Add(match);
             user2.Matches.Add(match);
             _userRepository.SaveChanges();
-            return Ok();
+
+            if (_matchRepository.setMatched(userId, sexId))
+            {
+                return Ok("Matched!");
+            }
+            return Ok("Not yet");
         }
-        [HttpPost("{userId:int}/setmatch/{sexId:int}")]
+        //w sumie to nie potrzebne xd
+        /*[HttpPost("{userId:int}/setMatch/{sexId:int}")]
         public IActionResult setMatched(int userId, int sexId)
         {
             var user = _userRepository.GetById(userId);
@@ -283,6 +289,66 @@ namespace PixelHeartApi.Controllers
             }
             var isMatched = _matchRepository.setMatched(userId, sexId);
             return Ok(isMatched);
+        }*/
+        [HttpGet("{userId:int}/match/{sexId:int}")]
+        public IActionResult getMatch(int userId, int sexId)
+        {
+            var user = _userRepository.GetById(userId);
+            if (user is null)
+            {
+                return NotFound();
+            }
+            var user2 = _userRepository.GetById(sexId);
+            if (user2 is null)
+            {
+                return NotFound();
+            }
+            var match = _matchRepository.getMatch(userId, sexId);
+            if (match is null)
+            {
+                return NotFound();
+            }
+            var matchDto = _mapper.Map<MatchDto>(match);
+            return Ok(matchDto);
+        }
+        [HttpGet("{userId:int}/matched")]
+        public IActionResult getUserMatched(int userId)
+        {
+            var user = _userRepository.GetById(userId);
+            if (user is null)
+            {
+                return NotFound();
+            }
+            var matcheds = _matchRepository.GetAllUserMatched(userId);
+            if (matcheds is null)
+            {
+                return NotFound("Brak egirls :(");
+            }
+            var userDtos = _mapper.Map<IEnumerable<UserDto>>(matcheds);
+            return Ok(userDtos);
+        }
+        [HttpPut("{userId:int}/matched/{sexId:int}")]
+        public IActionResult updateMatch(int userId, int sexId, string message)
+        {
+            return Ok();
+        }
+        [HttpDelete("{userId:int}/matched/{sexId:int}")]
+        public IActionResult deleteMatch(int userId,int sexId) {
+            var user1 = _userRepository.GetById(userId);
+            if (user1 is null)
+            {
+                return NotFound();
+            }
+            var user2 = _userRepository.GetById(sexId);
+            if (user2 is null)
+            {
+                return NotFound();
+            }
+            if(_matchRepository.deleteMatch(userId, sexId))
+            {
+                return Ok("Relacja usunieta");
+            }
+            return NotFound("Brak relacji");
         }
 
     }

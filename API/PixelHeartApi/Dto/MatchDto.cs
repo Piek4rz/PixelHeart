@@ -11,5 +11,6 @@ namespace PixelHeartApi.Dto
         public int SexId { get; set; }
         public bool IsInterested { get; set; }
         public bool AreMatched { get; set; }
+        public string MessagesJson { get; set; } = string.Empty;
     }
 }

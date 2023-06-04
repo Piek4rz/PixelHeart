@@ -9,7 +9,7 @@ namespace PixelHeartApi.Interfaces
         bool areMatched(int id_1, int id_2);
         int createMatch(int id_1, int id_2, bool interested);
         Match getMatch(int id_1, int id_2);
-        int deleteMatch(int id_1, int id_2);
+        bool deleteMatch(int id_1, int id_2);
         IEnumerable<User> GetAllUserMatched(int id_1);
     }
 }

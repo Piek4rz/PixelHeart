@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PixelHeartApi.Data;
 using PixelHeartApi.Interfaces;
 using PixelHeartApi.Models;
@@ -39,9 +40,24 @@ namespace PixelHeartApi.Repositories
             return newMatch.MatchId;
         }
 
-        public int deleteMatch(int id_1, int id_2)
+        public bool deleteMatch(int id_1, int id_2)
         {
-            throw new NotImplementedException();
+            var match1 = context.Matches.FirstOrDefault(e => e.UserId == id_1 && e.SexId == id_2);
+            var match2 = context.Matches.FirstOrDefault(e => e.UserId == id_2 && e.SexId == id_1);
+            if (match1 is null)
+            {
+                return false;
+            }
+            if (match2 is null)
+            {
+                return false;
+            }
+
+            context.Matches.Remove(match1);
+            context.Matches.Remove(match2);
+            context.SaveChanges();
+            return true;
+            
         }
 
         public IEnumerable<User> GetAllUserMatches(int id_1)
@@ -50,12 +66,14 @@ namespace PixelHeartApi.Repositories
         }
         public IEnumerable<User> GetAllUserMatched(int id_1)
         {
-            throw new NotImplementedException();
+            var users = context.Matches.Where(e => e.UserId == id_1 && e.AreMatched == true).Include(p => p.Sex).ToList();
+            return users.Select(e => e.Sex);
         }
 
         public Match getMatch(int id_1, int id_2)
         {
-            throw new NotImplementedException();
+            var match1 = context.Matches.FirstOrDefault(m => m.UserId == id_1 && m.SexId == id_2 && m.IsInterested);
+            return match1;
         }
 
         public bool setMatched(int id_1, int id_2)
