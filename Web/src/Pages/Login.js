@@ -1,69 +1,85 @@
-import React, {useState} from 'react';
-import "../Components/Background/LoginBackground.css"
+import React, { useState } from "react";
+import "../Components/Background/LoginBackground.css";
 import Button from "../Components/Button/Button";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
+const Login = () => {
+  const navigate = useNavigate();
+  const [data, setData] = useState({
+    email: "",
+    password: "",
+  });
+  const handleChange = ({ currentTarget: input }) => {
+    setData({ ...data, [input.name]: input.value });
+  };
+  const [rememberMe, setRememberMe] = useState(false);
 
+  const handleRememberMeChange = () => {
+    setRememberMe(!rememberMe);
+  };
 
-const Login = () =>{
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [rememberMe, setRememberMe] = useState(false);
+  const handleSubmit = () => {
+    if (!data) {
+      console.log(data);
+      return;
+    }
+    axios
+      .post("https://localhost:7081/api/Auth/login", data)
+      .then((res) => {
+        localStorage.setItem("token", res.data);
+      })
+      .catch((error) => console.log(error));
+    navigate("/");
+  };
 
-    const handleUsernameChange = (event) => {
-        setUsername(event.target.value);
-    };
+  return (
+    <div className="loginPage">
+      <div className="loginBackground"></div>
+      <div className="loginContainer">
+        <h1 className="loginText">Witaj ponownie!</h1>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <h2>Login</h2>
+            <input
+              type="text"
+              className="inputField"
+              name="email"
+              value={data.email}
+              onChange={handleChange}
+            />
+          </div>
+          <div>
+            <h2>Hasło</h2>
+            <input
+              type="password"
+              name="password"
+              className="inputField"
+              value={data.password}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="submitContainer">
+            <label>
+              <input
+                type="checkbox"
+                checked={rememberMe}
+                onChange={handleRememberMeChange}
+              />
+              Zapamiętaj mnie
+            </label>
 
-    const handlePasswordChange = (event) => {
-        setPassword(event.target.value);
-    };
-
-    const handleRememberMeChange = () => {
-        setRememberMe(!rememberMe);
-    };
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        // Tutaj możesz dodać logikę uwierzytelniania użytkownika
-        console.log('Zalogowano:', username, password, rememberMe);
-    };
-
-    return (
-        <div className="loginPage">
-            <div className="loginBackground"></div>
-            <div className="loginContainer">
-                <h1 className="loginText">Witaj ponownie!</h1>
-                <form onSubmit={handleSubmit}>
-                    <div>
-                        <h2>Login</h2>
-                            <input type="text" className="inputField" value={username} onChange={handleUsernameChange} />
-
-                    </div>
-                    <div>
-                        <h2>Hasło</h2>
-                            <input type="password" className="inputField" value={password} onChange={handlePasswordChange} />
-
-                    </div>
-                    <div className="submitContainer">
-                            <label>
-                                <input type="checkbox" checked={rememberMe} onChange={handleRememberMeChange} />
-                                Zapamiętaj mnie
-                            </label>
-
-                        <div className="submitButton">
-                            <Button onClick={() => handleSubmit()} text="Zaloguj" ></Button>
-
-                        </div>
-
-
-                    </div>
-                    <div className="forgot">
-                        <a href="/przywroc-haslo">Zapomniałeś hasła?</a>
-                    </div>
-                </form>
+            <div className="submitButton">
+              <Button onClick={() => handleSubmit()} text="Zaloguj"></Button>
             </div>
+          </div>
+          <div className="forgot">
+            <a href="/przywroc-haslo">Zapomniałeś hasła?</a>
+          </div>
+        </form>
+      </div>
     </div>
-    );
-}
-
+  );
+};
 
 export default Login;
