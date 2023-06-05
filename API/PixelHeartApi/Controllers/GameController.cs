@@ -24,7 +24,8 @@ namespace PixelHeartApi.Controllers
         public IActionResult GetAllGames()
         {
             var games = _gameRepository.GetAll();
-            return Ok(games);
+            var gamesDto = _mapper.Map<IEnumerable<GameDto>>(games);
+            return Ok(gamesDto);
         }
         [HttpGet("{id:int}")]
         public IActionResult GetGamesById(int id)

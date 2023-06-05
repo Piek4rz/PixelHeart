@@ -30,8 +30,9 @@ namespace PixelHeartApi.Controllers
             {
                 return NotFound();
             }
+            var skillsDtos = _mapper.Map<IEnumerable<SkillsDto>>(skills);
             //tutaj zmapowac do dto
-            return Ok(skills);
+            return Ok(skillsDtos);
         }
         [HttpGet("{id:int}")]
         public IActionResult GetSkill(int id)

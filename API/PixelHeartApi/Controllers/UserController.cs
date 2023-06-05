@@ -120,8 +120,8 @@ namespace PixelHeartApi.Controllers
                     {
                         return BadRequest(userEmail);
                     }
-
-                    return Ok(user);
+                    var userDto = _mapper.Map<UserDto>(user);
+                    return Ok(userDto);
                 }
 
                 return BadRequest("Nieprawidłowy token.");
