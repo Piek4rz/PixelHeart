@@ -217,8 +217,8 @@ namespace PixelHeartApi.Controllers
                 return BadRequest("Nie ma takiego użytkownika!");
             }
             var games = _userRepository.GetGameByUserId(userId);
-
-            return Ok(games);
+            var gamesDto = _mapper.Map<IEnumerable<GameDto>>(games);
+            return Ok(gamesDto);
         }
         [HttpDelete("{userId:int}/game/{gameId:int}")]
         public IActionResult deleteUserGame(int userId, int gameId)
@@ -237,7 +237,7 @@ namespace PixelHeartApi.Controllers
         }
 
         //Match related
-        [HttpPost("{userId:int}/match/{sexId:int}")]
+        [HttpPost("{userId:int}/match/{sexId:int}/{interested:bool}")]
         public IActionResult createMatch(int userId, int sexId, bool interested)
         {
             var user = _userRepository.GetById(userId);
