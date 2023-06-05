@@ -23,8 +23,9 @@ const CreateProfile = () => {
     userGames: null,
     matches: null,
   });
-  const token = localStorage.getItem("token");
+  const [token, setToken] = useState(localStorage.getItem("token"));
   useEffect(() => {
+    setToken(localStorage.getItem("token"));
     axios
       .get("https://localhost:7081/api/Games")
       .then((response) => {
@@ -123,6 +124,15 @@ const CreateProfile = () => {
       .catch((error) => {
         console.error(error);
       });
+    if (selectedDivs) {
+      selectedDivs.map((gameId) => {
+        axios
+          .post(`https://localhost:7081/api/User/${user.id}/Game/${gameId}`)
+          .catch((error) => {
+            console.log(error);
+          });
+      });
+    }
     navigate("/Home");
   };
 
@@ -142,9 +152,7 @@ const CreateProfile = () => {
     const imageUrl = URL.createObjectURL(selectedFile);
     setSelectedImage(imageUrl);
     var input = "photo";
-    setUser({ ...user, [input]: input });
-    console.log(imageUrl);
-    console.log(user);
+    setUser({ ...user, [input]: imageUrl });
   };
 
   return (

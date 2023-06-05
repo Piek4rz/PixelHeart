@@ -8,7 +8,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 
 const Main = () => {
-  const token = localStorage.getItem("token");
+  const [token, setToken] = useState(localStorage.getItem("token"));
   const [loggedUser, setLoggedUser] = useState({
     id: 0,
     name: "",
@@ -20,6 +20,7 @@ const Main = () => {
   });
   const [matches, setMatches] = useState([]);
   useEffect(() => {
+    setToken(localStorage.getItem("token"));
     if (token) {
       axios
         .get(`https://localhost:7081/token/${token}`)
@@ -40,6 +41,9 @@ const Main = () => {
         const data = res.data;
         console.log(data);
         setMatches(data);
+      })
+      .catch((error) => {
+        console.log(error);
       });
   }, []);
   return (
