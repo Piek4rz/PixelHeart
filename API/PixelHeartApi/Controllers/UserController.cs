@@ -166,7 +166,7 @@ namespace PixelHeartApi.Controllers
 
             return Ok();
         }
-        [HttpPost("{userId:int}/Skill/{skillId:int}")]
+        [HttpPost("{userId:int}/Skill/{skillId:int}/{lvl:int}")]
         public IActionResult addSkill(int userId, int skillId, int lvl)
         {
             var user = _userRepository.GetById(userId);

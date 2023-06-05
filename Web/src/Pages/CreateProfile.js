@@ -89,13 +89,38 @@ const CreateProfile = () => {
   ];
 
   const [lvlValues, setLvlValues] = useState([]);
+  const [keyValues, setKeyValues] = useState([]);
   const [lvl, setLvl] = useState({ id: 0, lvl: 0 });
+
+  const handleInputChange = (event, index) => {
+    const newValue = event.target.value;
+    const newLvlValues = [...lvlValues];
+    newLvlValues[index] = newValue;
+    setLvlValues(newLvlValues);
+    console.log(lvlValues);
+  };
+  const handleSelectChange = (event, index) => {
+    const newValue = event.target.value;
+    const newKeyValues = [...keyValues];
+    newKeyValues[index] = newValue;
+    setKeyValues(newKeyValues);
+    console.log(keyValues);
+  };
 
   const statDivs = Array.from({ length: 6 }, (_, index) => (
     <div className="stat" key={index}>
-      <select key={index} className="selectCustom">
+      <select
+        key={index}
+        className="selectCustom"
+        onChange={(event) => handleSelectChange(event, index)}
+      >
         {allStats.map((stat) => (
-          <option className="optionCustom" key={stat.id} value={stat.name}>
+          <option
+            className="optionCustom"
+            key={stat.id}
+            id={stat.id}
+            value={stat.name}
+          >
             {stat.name}
           </option>
         ))}
@@ -106,10 +131,10 @@ const CreateProfile = () => {
           type="range"
           min={0}
           max={100}
-          value={1}
-          //onChange={}
+          value={lvlValues[index] || 0}
+          onChange={(event) => handleInputChange(event, index)}
         />
-        <div>{1}%</div>
+        <div>{lvlValues[index] || 0}%</div>
       </div>
     </div>
   ));
@@ -143,7 +168,29 @@ const CreateProfile = () => {
           });
       });
     }
-    navigate("/Home");
+    if (keyValues.length === 6 && lvlValues.length === 6) {
+      const selectedStatsDataArray = [];
+
+      keyValues.forEach((statName, index) => {
+        const stat = allStats.find((s) => s.name === statName);
+        if (stat) {
+          const { id } = stat;
+          const lvl = lvlValues[index];
+          const selectedStatData = { id, lvl };
+          selectedStatsDataArray.push(selectedStatData);
+        }
+      });
+      selectedStatsDataArray.map((stat) => {
+        axios
+          .post(
+            `https://localhost:7081/api/User/${user.id}/Skill/${stat.id}/${stat.lvl}`
+          )
+          .catch((error) => {
+            console.log(error);
+          });
+      });
+    }
+    navigate("/");
   };
 
   const handleClickDiv = (gameId) => {
