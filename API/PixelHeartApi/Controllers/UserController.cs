@@ -250,10 +250,10 @@ namespace PixelHeartApi.Controllers
             {
                 return NotFound();
             }
-            /*if (_userRepository.skillRelationExists(userId, skillId))
+            if (_matchRepository.isMatchExists(userId, sexId))
             {
                 return BadRequest("Relacja juz istnieje!");
-            }*/
+            }
             if (user.Matches == null)
             {
                 user.Matches = new List<Match>();
@@ -349,6 +349,39 @@ namespace PixelHeartApi.Controllers
                 return Ok("Relacja usunieta");
             }
             return NotFound("Brak relacji");
+        }
+        [HttpGet("{userId:int}/sex")]
+        public IActionResult getSex(int userId)
+        {
+            var allUsers = _userRepository.GetAll();
+            if(_userRepository.GetById(userId) is null)
+            {
+                return NotFound();
+            }
+            var userAlreadyGet = _matchRepository.GetAllUserMatched(userId);
+            var random = new Random();
+            var filteredUsers = allUsers
+    .Where(user => user.Id != userId && !userAlreadyGet.Any(match => match.Id == user.Id))
+    .ToList();
+            var check = true;
+            if (filteredUsers.Count > 0)
+            {
+                User randomUser = new User();
+                while (check)
+                {
+                    randomUser = filteredUsers[random.Next(filteredUsers.Count)];
+                    if(_matchRepository.isMatchExists(userId, randomUser.Id))
+                    {
+                        continue;
+                    }
+                    check = false;
+
+                }
+                var userDto = _mapper.Map<UserDto>(randomUser);
+                return Ok(userDto);
+            }
+
+            return NotFound();
         }
 
     }

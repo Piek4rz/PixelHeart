@@ -11,5 +11,7 @@ namespace PixelHeartApi.Interfaces
         Match getMatch(int id_1, int id_2);
         bool deleteMatch(int id_1, int id_2);
         IEnumerable<User> GetAllUserMatched(int id_1);
+        bool isMatchExists(int id_1, int id_2);
+
     }
 }

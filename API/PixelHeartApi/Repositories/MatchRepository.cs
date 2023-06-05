@@ -25,19 +25,26 @@ namespace PixelHeartApi.Repositories
             return isMatched;
         }
 
+        //w sumie nie uzywam
         public int createMatch(int id_1, int id_2,bool interested)
         {
-            Match newMatch = new Match
+            var match = context.Matches.FirstOrDefault(e => e.UserId == id_1 && e.SexId == id_2);
+            if(match is null)
             {
-                UserId = id_1,
-                SexId = id_2,
-                IsInterested = interested
-            };
+                Match newMatch = new Match
+                {
+                    UserId = id_1,
+                    SexId = id_2,
+                    IsInterested = interested
+                };
 
-            context.Matches.Add(newMatch);
-            context.SaveChanges();
+                context.Matches.Add(newMatch);
+                context.SaveChanges();
 
-            return newMatch.MatchId;
+                return newMatch.MatchId;
+            }
+            return 0;
+           
         }
 
         public bool deleteMatch(int id_1, int id_2)
@@ -94,6 +101,13 @@ namespace PixelHeartApi.Repositories
             }
 
             return false;
+        }
+        public bool isMatchExists(int id_1, int id_2)
+        {
+            var match = context.Matches.FirstOrDefault(e => e.UserId == id_1 && e.SexId == id_2);
+            if(match is null)
+                return false;
+            return true;
         }
 
 
