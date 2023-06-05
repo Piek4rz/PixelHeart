@@ -12,16 +12,13 @@ const CreateProfile = () => {
   const [allGames, setAllGames] = useState([]);
   const [allStats, setAllStats] = useState([]);
   const [user, setUser] = useState({
-    id: 2,
-    name: "strin321321g",
-    email: "stri321312ng",
-    password: "string",
+    id: 0,
+    name: "",
+    email: "",
+    password: "",
     age: 0,
-    backstory: "string",
+    backstory: "",
     photo: "",
-    userSkills: null,
-    userGames: null,
-    matches: null,
   });
   const [token, setToken] = useState(localStorage.getItem("token"));
   useEffect(() => {
@@ -91,16 +88,29 @@ const CreateProfile = () => {
     "Destiny 2",
   ];
 
+  const [lvlValues, setLvlValues] = useState([]);
+  const [lvl, setLvl] = useState({ id: 0, lvl: 0 });
+
   const statDivs = Array.from({ length: 6 }, (_, index) => (
     <div className="stat" key={index}>
-      <select className="selectCustom">
+      <select key={index} className="selectCustom">
         {allStats.map((stat) => (
           <option className="optionCustom" key={stat.id} value={stat.name}>
             {stat.name}
           </option>
         ))}
       </select>
-      <Slider></Slider>
+      <div>
+        <input
+          key={index}
+          type="range"
+          min={0}
+          max={100}
+          value={1}
+          //onChange={}
+        />
+        <div>{1}%</div>
+      </div>
     </div>
   ));
 
