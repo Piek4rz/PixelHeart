@@ -133,6 +133,18 @@ label{
     outline: none;
 }
 
+input[type="number"] {
+    padding: 10px;
+    border: 1px solid #5A69B3;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #5A69B3;
+    outline: none;
+    text-align: center;
+}
+
+
+
 
 input[type="checkbox"] {
     appearance: none;

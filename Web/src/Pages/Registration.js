@@ -84,7 +84,7 @@ function Registration() {
                         <div className="back">
                             <a href="/" >&lt;Powrót</a>
                         </div>
-                        <Button onClick={() => handleSubmit()} text="Zarejestruj" ></Button>
+                        <Button className="buttonRegister" onClick={() => handleSubmit()} text="Zarejestruj" ></Button>
                     </div>
                 </div>
             </div>

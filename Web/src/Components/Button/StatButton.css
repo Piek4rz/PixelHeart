@@ -1,0 +1,19 @@
+.statButtons{
+   width: 190px;
+   margin: 30px;
+   background: linear-gradient(180deg, #D496A0 , rgba(217, 217, 217, 0) 100%);
+   border: none;
+   border-radius: 50px;
+   padding: 10px 20px;
+   font-family: 'Teko', sans-serif;
+   color: white;
+   font-size: 20px;
+}
+
+.oddStat{
+   margin-left: 60px;
+}
+
+.checked{
+   background-color: #5A69B3;
+}
