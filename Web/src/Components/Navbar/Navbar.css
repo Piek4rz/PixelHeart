@@ -1,0 +1,54 @@
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    background-color: #2C576D;
+    transition: width 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 15px;
+}
+
+button {
+    background-color: #234559;
+    border: none;
+    width: 100%;
+    display: block;
+    text-align: center;
+    font-family: 'Teko', sans-serif;
+    color: white;
+    cursor: pointer;
+    font-size: 20px;
+
+    padding-top: 10px;
+
+}
+
+.navbarImage{
+    height: 100px;
+    border-radius: 100px;
+    border: 3px solid #d496a0;
+}
+
+.expandButton{
+    background-color: transparent;
+    border: none;
+    font-size: 40px;
+}
+
+ul {
+    margin-top: 20px;
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    padding: 10px;
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+}
