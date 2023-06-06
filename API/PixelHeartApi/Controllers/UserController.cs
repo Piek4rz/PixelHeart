@@ -364,18 +364,25 @@ namespace PixelHeartApi.Controllers
             var filteredUsers = allUsers
     .Where(user => user.Id != userId && !userAlreadyGet.Any(match => match.Id == user.Id))
     .ToList();
+            var count = 0;
             var check = true;
             if (filteredUsers.Count > 0)
             {
                 User randomUser = new User();
                 while (check)
                 {
+                    count++;
                     randomUser = filteredUsers[random.Next(filteredUsers.Count)];
                     if(_matchRepository.isMatchedExists(userId, randomUser.Id))
                     {
+                        if (count == 100)
+                        {
+                            return BadRequest("Brak ludzi na serwisie");
+                        }
                         continue;
                     }
                     check = false;
+
 
                 }
                 var userDto = _mapper.Map<UserDto>(randomUser);

@@ -10,19 +10,22 @@ import CreateProfile from "./Pages/CreateProfile";
 import Main from "./Pages/Main";
 
 const App = () => {
-  const user = localStorage.getItem("token") != null;
+  const userLoggedIn = localStorage.getItem("token") != null;
   return (
     <Routes>
-      {user ? (
-        <Route path="/" element={<Main />} />
+      {userLoggedIn ? (
+        <>
+          <Route path="/" element={<Main />} />
+        </>
       ) : (
-        <Route path="/" element={<Navigate replace to="/home" />} />
+        <>
+          <Route path="/" element={<Navigate replace to="/home" />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/register" element={<Registration />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/CreateProfile" element={<CreateProfile />} />
+        </>
       )}
-
-      <Route path="/home" element={<Home />} />
-      <Route path="/register" element={<Registration />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/CreateProfile" element={<CreateProfile />} />
     </Routes>
   );
 };
