@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using PixelHeartApi.Dto;
 using PixelHeartApi.Interfaces;
 using PixelHeartApi.Models;
@@ -383,6 +384,37 @@ namespace PixelHeartApi.Controllers
 
             return NotFound();
         }
+        [HttpPut("{id_1:int}/mmessage/{id_2:int}")]
+        public IActionResult updateMessage([FromRoute] int id_1, [FromRoute] int id_2, [FromBody] List<MessageModel> messages)
+        {
+            if (_userRepository.GetById(id_1) is null)
+            {
+                return NotFound("User nie istnieje!");
+            }
+            if (_userRepository.GetById(id_2) is null)
+            {
+                return NotFound("User nie istnieje!");
+            }
 
+            // Convert the messages list to JSON
+            string json = JsonConvert.SerializeObject(messages);
+            _matchRepository.updateMassage(id_1, id_2, json);
+            return Ok("Wyslane!");
+        }
+        [HttpGet("{id_1:int}/mmessage/{id_2:int}")]
+        public IActionResult getMessage(int id_1,int id_2)
+        {
+            if (_userRepository.GetById(id_1) is null)
+            {
+                return NotFound("User nie istnieje!");
+            }
+            if (_userRepository.GetById(id_2) is null)
+            {
+                return NotFound("User nie istnieje!");
+            }
+            var message = _matchRepository.getMessage(id_1, id_2); 
+            return Ok(message);
+        }
     }
+
 }

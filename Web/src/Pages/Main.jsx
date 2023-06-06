@@ -46,7 +46,7 @@ const Main = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [token]);
 
   const [findLove, setFindLove] = useState({
     id: 0,
@@ -70,6 +70,8 @@ const Main = () => {
         });
     }
   };
+  const handleChat = () => {};
+  const handleProfile = () => {};
 
   const handleShowFindLove = () => {
     handleFindLove(token);
@@ -86,12 +88,14 @@ const Main = () => {
         />
         <h1>{loggedUser.name}</h1>
         <h1>Lvl.{loggedUser.age}</h1>
-        <button>Profil</button>
+        <button onClick={handleProfile}>Profil</button>
         <button onClick={handleShowFindLove}>Zdobywaj</button>
         <h2>Lista zdobyczy</h2>
         <ul>
           {matches.map((match) => (
-            <button>{match.name}</button>
+            <button onClick={handleChat} name={match.id}>
+              {match.name}
+            </button>
           ))}
         </ul>
       </nav>

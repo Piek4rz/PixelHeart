@@ -110,6 +110,25 @@ namespace PixelHeartApi.Repositories
             return true;
         }
 
+        public bool updateMassage(int id_1, int id_2, string message)
+        {
+            var match1 = context.Matches.FirstOrDefault(m => m.UserId == id_1 && m.SexId == id_2);
+            var match2 = context.Matches.FirstOrDefault(m => m.UserId == id_2 && m.SexId == id_1);
+            if(match1 is null)
+                return false;
+            if(match2 is null) return false;
+            match1.MessagesJson = message;
+            match2.MessagesJson = message;
+            context.SaveChanges();
+            return true;
+        }
 
+        public string getMessage(int id_1, int id_2)
+        {
+            var match = context.Matches.FirstOrDefault(m => m.UserId == id_1 && m.SexId == id_2);
+            if (match is null)
+                return "Bląd";
+            return match.MessagesJson;
+        }
     }
 }

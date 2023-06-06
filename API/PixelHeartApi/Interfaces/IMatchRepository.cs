@@ -13,5 +13,8 @@ namespace PixelHeartApi.Interfaces
         IEnumerable<User> GetAllUserMatched(int id_1);
         bool isMatchExists(int id_1, int id_2);
 
+        bool updateMassage(int id_1, int id_2, string message);
+        string getMessage(int id_1, int id_2);
+
     }
 }
