@@ -81,6 +81,23 @@ const Main = () => {
     console.log(findLove);
     setShowFindLove(true);
   };
+
+  const reloadZdobycze = () => {
+    axios
+      .get(`https://localhost:7081/api/User/${loggedUser.id}/matched`)
+      .then((res) => {
+        const data = res.data;
+        console.log(data);
+        setMatches(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  const handleLogOut = () => {
+    localStorage.removeItem("token");
+    window.location.reload();
+  };
   return (
     <div style={{ display: "flex" }}>
       <nav style={{ flex: 1 }}>
@@ -101,6 +118,7 @@ const Main = () => {
             </button>
           ))}
         </ul>
+        <button onClick={handleLogOut}>Wyloguj</button>
       </nav>
       {showFindLove && (
         <div style={{ flex: 1 }}>
@@ -109,6 +127,7 @@ const Main = () => {
             token={token}
             findLove={findLove}
             loggedUser={loggedUser}
+            reloadZdobycze={reloadZdobycze}
           />
         </div>
       )}

@@ -3,7 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const FindLove = ({ handleFindLove, token, findLove, loggedUser }) => {
+const FindLove = ({
+  handleFindLove,
+  token,
+  findLove,
+  loggedUser,
+  reloadZdobycze,
+}) => {
   const [loveGames, setLoveGames] = useState([]);
   const [loveStats, setLoveStats] = useState([]);
   useEffect(() => {
@@ -64,6 +70,7 @@ const FindLove = ({ handleFindLove, token, findLove, loggedUser }) => {
         });
     }
     handleFindLove(token);
+    reloadZdobycze();
   };
   const handlePokazTowary = () => {
     if (findLove) {
@@ -96,6 +103,7 @@ const FindLove = ({ handleFindLove, token, findLove, loggedUser }) => {
         });
     }
     handleFindLove(token);
+    reloadZdobycze();
   };
   return (
     <>
