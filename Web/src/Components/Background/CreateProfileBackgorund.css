@@ -35,7 +35,7 @@ p{
 .profileContents{
   background-image: url("../../Assets/bgnoise2.svg");
   position: relative;
-  padding: 0 70px 100px;
+  padding: 100px 150px;
 }
 
 .selected{
