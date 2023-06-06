@@ -371,7 +371,7 @@ namespace PixelHeartApi.Controllers
                 while (check)
                 {
                     randomUser = filteredUsers[random.Next(filteredUsers.Count)];
-                    if(_matchRepository.isMatchExists(userId, randomUser.Id))
+                    if(_matchRepository.isMatchedExists(userId, randomUser.Id))
                     {
                         continue;
                     }

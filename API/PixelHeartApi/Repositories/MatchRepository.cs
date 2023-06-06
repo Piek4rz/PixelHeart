@@ -109,6 +109,13 @@ namespace PixelHeartApi.Repositories
                 return false;
             return true;
         }
+        public bool isMatchedExists(int id_1, int id_2)
+        {
+            var match = context.Matches.FirstOrDefault(e => e.UserId == id_1 && e.SexId == id_2 && e.AreMatched==true);
+            if (match is null)
+                return false;
+            return true;
+        }
 
         public bool updateMassage(int id_1, int id_2, string message)
         {

@@ -15,6 +15,7 @@ namespace PixelHeartApi.Interfaces
 
         bool updateMassage(int id_1, int id_2, string message);
         string getMessage(int id_1, int id_2);
+        bool isMatchedExists(int id_1, int id_2);
 
     }
 }
