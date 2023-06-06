@@ -36,6 +36,9 @@ const Main = () => {
           window.location.reload();
         });
     }
+  }, []);
+
+  useEffect(() => {
     axios
       .get(`https://localhost:7081/api/User/${loggedUser.id}/matched`)
       .then((res) => {
@@ -46,7 +49,7 @@ const Main = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, [token]);
+  }, [loggedUser.id]);
 
   const [findLove, setFindLove] = useState({
     id: 0,
