@@ -45,7 +45,7 @@ function Registration() {
     };
 
     return (
-        <div>
+        <div className="registerPage">
             <div className="registerBackground"></div>
             <div className="registerContainer">
                 <h1 className="registerText">Zarejestruj się</h1>
@@ -88,6 +88,7 @@ function Registration() {
                     </div>
                 </div>
             </div>
+
         </div>
     );
 }

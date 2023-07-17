@@ -1,42 +1,64 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
 import Button from '../Components/Button/Button';
 import "../Components/Button/Button.css";
-import "../Components/Background/HomeBackground.css";
+import "../Components/Background/HomeBackground2.css";
 import logo from "../Assets/logo.svg";
 import {useNavigate} from "react-router-dom";
+import c1 from '../Assets/c1.png';
+import c2 from '../Assets/c2.png';
+import c3 from '../Assets/c3.png';
 
 
 
 const Home = () => {
     const navigate = useNavigate();
+
+    useEffect(() => {
+        document.body.classList.add('home');
+    });
     const handleClick = (buttonType) => {
         if (buttonType === 'start')
         {
            navigate("/register")
+            document.body.classList.remove('home');
         }
         else if (buttonType === 'continue')
         {
             navigate("/login")
+            document.body.classList.remove('home');
         }
     };
 
     return (
+
         <div className="pageContainer">
             <div className="landingPageBackground">
 
-                <img className="logo" src={logo} alt="PixelHeart" />
-                <div className="text1">
-                    <h1>Znajdź alternatywkę lub egirla, która zniszczy ci życie!</h1>
-                    <h2>Zacznij swoją przygodę już dziś</h2>
+            </div>
+            <div className="landingPage">
+                <div className="navbar">
+                    <a href="strona_home.html"><div className="left">PixelHeart</div></a>
+                    <div className="right">
+                        <a href="strona_home.html"><div>Home</div></a>
+                        <a href="strona_about_us.html"><div>About Us</div></a>
+                        <a href="login"><div>Login</div></a>
+                        {/*<div> <Button onClick={() => handleClick()} text="Login" ></Button></div>*/}
+                    </div>
+                </div>
+                <div className="content">
+                    <div className="text">
+                        <div className="headline"> Forge Unbreakable Gaming Bonds</div>
+                        <div className="bottomText">Find Your Perfect Match Online!</div>
+                    </div>
+                    <div className="getStarted">
+                        <div> <Button onClick={() => handleClick('start')} text="Get Started" ></Button></div>
+                    </div>
                 </div>
             </div>
-            <Button className="buttonStart" onClick={() => handleClick('start')} text="Start Game" />
-
-            <Button className="buttonContinue" onClick={() => handleClick('continue')} text="Continue" />
-            <div className="text2">
-                <h2>lub wróć do swojego poprzedniego zapisu</h2>
-            </div>
+            <img className="c1" src={c1}/>
+            <img className="c2" src={c2}/>
+            <img className="c3" src={c3}/>
 
         </div>
 

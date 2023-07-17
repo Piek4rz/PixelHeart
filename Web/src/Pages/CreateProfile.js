@@ -12,19 +12,17 @@ const CreateProfile = () => {
     const [allGames, setAllGames] = useState([]);
     const [allStats, setAllStats] = useState([]);
     const [user, setUser] = useState({
-        id: 2,
-        name: "strin321321g",
-        email: "stri321312ng",
-        password: "string",
+        id: 0,
+        name: "",
+        email: "",
+        password: "",
         age: 0,
-        backstory: "string",
+        backstory: "",
         photo: "",
-        userSkills: null,
-        userGames: null,
-        matches: null,
     });
-    const token = localStorage.getItem("token");
+    const [token, setToken] = useState(localStorage.getItem("token"));
     useEffect(() => {
+        setToken(localStorage.getItem("token"));
         axios
             .get("https://localhost:7081/api/Games")
             .then((response) => {
@@ -90,26 +88,93 @@ const CreateProfile = () => {
         "Destiny 2",
     ];
 
+    const [lvlValues, setLvlValues] = useState([]);
+    const [keyValues, setKeyValues] = useState([]);
+    const [lvl, setLvl] = useState({ id: 0, lvl: 0 });
+
+    const handleInputChange = (event, index) => {
+        const newValue = event.target.value;
+        const newLvlValues = [...lvlValues];
+        newLvlValues[index] = newValue;
+        setLvlValues(newLvlValues);
+        console.log(lvlValues);
+    };
+    const handleSelectChange = (event, index) => {
+        const newValue = event.target.value;
+        const newKeyValues = [...keyValues];
+        newKeyValues[index] = newValue;
+        setKeyValues(newKeyValues);
+        console.log(keyValues);
+    };
+
     const statDivs = Array.from({ length: 6 }, (_, index) => (
         <div className="stat" key={index}>
-            <select className="selectCustom" key={index}>
-                {allStats.map((stat) => (
-                    <option className="optionCustom" key={stat.id} value={stat.name}>
-                        {stat.name}
+            <select
+                className="selectCustom"
+                onChange={(event) => handleSelectChange(event, index)}
+            >
+                {stats.map((stat,optionIndex) => (
+                    <option
+                        className="optionCustom"
+                        key={optionIndex}
+                        value={stat}
+                    >
+                        {stat}
                     </option>
                 ))}
             </select>
-            <Slider></Slider>
+            <div>
+                <input
+                    key={index}
+                    type="range"
+                    min={0}
+                    max={100}
+                    value={lvlValues[index] || 0}
+                    onChange={(event) => handleInputChange(event, index)}
+                />
+                <div>{lvlValues[index] || 0}%</div>
+            </div>
         </div>
     ));
 
-    const gameDivs = allGames.map((game) => (
+    // const statDivs = Array.from({ length: 6 }, (_, index) => (
+    //   <div className="stat" key={index}>
+    //     <select
+    //       key={index}
+    //       className="selectCustom"
+    //       onChange={(event) => handleSelectChange(event, index)}
+    //     >
+    //       {allStats.map((stat) => (
+    //         <option
+    //           className="optionCustom"
+    //           key={stat.id}
+    //           id={stat.id}
+    //           value={stat.name}
+    //         >
+    //           {stat.name}
+    //         </option>
+    //       ))}
+    //     </select>
+    //     <div>
+    //       <input
+    //         key={index}
+    //         type="range"
+    //         min={0}
+    //         max={100}
+    //         value={lvlValues[index] || 0}
+    //         onChange={(event) => handleInputChange(event, index)}
+    //       />
+    //       <div>{lvlValues[index] || 0}%</div>
+    //     </div>
+    //   </div>
+    // ));
+
+    const gameDivs = games.map((game) => (
         <div
-            className={selectedDivs.includes(game.id) ? "game selected" : "game"}
-            key={game.id}
-            onClick={() => handleClickDiv(game.id)}
+            className={selectedDivs.includes(game) ? "game selected" : "game"}
+            onClick={() => handleClickDiv(game)}
         >
-            <p>{game.name}</p>
+            <p>{game}</p>
         </div>
     ));
 
@@ -123,6 +188,37 @@ const CreateProfile = () => {
             .catch((error) => {
                 console.error(error);
             });
+        if (selectedDivs) {
+            selectedDivs.map((gameId) => {
+                axios
+                    .post(`https://localhost:7081/api/User/${user.id}/Game/${gameId}`)
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            });
+        }
+        if (keyValues.length === 6 && lvlValues.length === 6) {
+            const selectedStatsDataArray = [];
+
+            keyValues.forEach((statName, index) => {
+                const stat = allStats.find((s) => s.name === statName);
+                if (stat) {
+                    const { id } = stat;
+                    const lvl = lvlValues[index];
+                    const selectedStatData = { id, lvl };
+                    selectedStatsDataArray.push(selectedStatData);
+                }
+            });
+            selectedStatsDataArray.map((stat) => {
+                axios
+                    .post(
+                        `https://localhost:7081/api/User/${user.id}/Skill/${stat.id}/${stat.lvl}`
+                    )
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            });
+        }
         navigate("/Main");
     };
 
@@ -142,9 +238,7 @@ const CreateProfile = () => {
         const imageUrl = URL.createObjectURL(selectedFile);
         setSelectedImage(imageUrl);
         var input = "photo";
-        setUser({ ...user, [input]: input });
-        console.log(imageUrl);
-        console.log(user);
+        setUser({ ...user, [input]: imageUrl });
     };
 
     return (
