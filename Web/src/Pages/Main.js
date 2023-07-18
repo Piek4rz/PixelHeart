@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "../Components/Button/Button";
 import "../Components/Button/Button.css";
-import "../Components/Background/HomeBackground.css";
+import "../Components/Background/HomeBackground2.css";
 import logo from "../Assets/logo.svg";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";

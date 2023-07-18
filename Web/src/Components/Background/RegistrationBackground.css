@@ -1,15 +1,8 @@
-.registerPage{
-    background-color: white;
-    height: inherit;
-}
-
-
 .registerBackground {
-    overflow: hidden;
     top: 0;
     right: 0;
     position: absolute;
-    width: 60%;
+    width: 70%;
     height: 100%;
     z-index: -1;
     background: linear-gradient(180deg, #D496A0 0%, #5A69B3 100%) top right;
@@ -33,7 +26,7 @@
     top: 0;
     width: 100%;
     height: 100%;
-    background-image: url("../../Assets/backgroundRegister.png");
+    background-image:url("../../Assets/backgroundRegister.png");
     background-repeat: no-repeat;
     mix-blend-mode: darken;
     opacity: 0;
@@ -43,28 +36,20 @@
 .registerBackground:after {
     content: "";
     position: absolute;
-    top: 20%;
-    left: 50%;
     width: 100%;
     height: 100%;
-    background-image: url("../../Assets/registerPath.svg");
-    background-repeat: no-repeat;
-    transform: scale(120%);
-    opacity: 0;
-    animation: fade-in 2s ease forwards 1s;
+    background-image: url("../../Assets/bgnoise2.svg");
 }
 
 
 .registerContainer {
-    width: 60%;
-    height: 100%;
-    position: fixed;
-    left: 0;
-    top: 0;
+    overflow-x: hidden;
     display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 2rem;
+    margin-top: 15rem;
+    background-color: transparent;
 }
 
 .registerText {
@@ -72,13 +57,16 @@
     margin-bottom: 1.5rem;
 }
 
+.row{
+    width: 60rem;
+}
+
 .registerForm {
-    display: grid;
+    display: flex;
+    flex-wrap: wrap;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto 1fr;
-    width: 80%;
-    padding: 3rem;
-    gap: 1.5rem;
+    margin: 3rem;
+    padding-bottom: 5rem;
 }
 
 .registerForm h2{
@@ -89,53 +77,37 @@
 }
 
 
-.col2 {
-    grid-column: 1 / span 2;
-    display: flex;
-    justify-content: center;
-}
 label{
-    font-size: 20px;
+    font-size: 1.5rem;
 }
 
 
-
-.col4{
-    grid-column: 1 / span 2;
-    padding: 2rem;
-    display: flex;
-    justify-content: center;
-    min-height: 5rem;
-}
-
-.col4 a {
+.registerForm a {
     font-size: 2.5rem;
     text-decoration: none;
     color: #5A69B3;
 }
 
-
-.back{
-    margin-right: 500px;
-    align-self: center;
+#loginButtons{
+    margin-top: 5rem;
 }
 
+
 .inputField {
-    z-index: 0;
     border-radius: 50px;
     border-color: #5A69B3;
     border-width: 1px;
-    padding: 20px;
-    width: 90%;
+    padding: 1rem;
     margin-top: 0;
     outline: none;
+    width: 25rem;
 }
 
 input[type="number"] {
     padding: 10px;
     border: 1px solid #5A69B3;
     border-radius: 4px;
-    font-size: 16px;
+    font-size: 1rem;
     color: #5A69B3;
     outline: none;
     text-align: center;
@@ -174,6 +146,36 @@ input[type="checkbox"]::before {
 
 input[type="checkbox"]:checked::before {
     transform: scaleX(1);
+}
+
+@media screen and (max-width: 72rem) {
+
+    .registerPage{
+        /*background: linear-gradient(rgba(255, 255, 255, 0),white, rgba(255, 255, 255, 0));*/
+        height: 100%;
+    }
+
+    .registerBackground{
+        top: 0;
+        right: 0;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background: linear-gradient(180deg, #D496A0, #5A69B3, white) top right;
+        clip-path: none;
+    }
+
+
+    .registerContainer{
+        margin: 10rem 2rem 2rem;
+
+        align-items: flex-start;
+    }
+
+    .registerText{
+        margin-left: 3rem;
+    }
 }
 
 

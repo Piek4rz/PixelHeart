@@ -28,40 +28,45 @@ const Login = () =>{
     };
 
     return (
-        <div className="loginPage">
-            <div className="loginBackground"></div>
-            <div className="loginContainer">
-                <h1 className="loginText">Witaj ponownie!</h1>
-                <form onSubmit={handleSubmit}>
-                    <div>
-                        <h2>Login</h2>
-                            <input type="text" className="inputField" value={username} onChange={handleUsernameChange} />
+        <div className="registerPage">
+            <div className="registerBackground"></div>
+            <div className="registerContainer">
+                <h1 className="registerText">Welcome back</h1>
 
-                    </div>
-                    <div>
-                        <h2>Hasło</h2>
-                            <input type="password" className="inputField" value={password} onChange={handlePasswordChange} />
+                <div className="registerForm">
+                    <div className="container">
 
-                    </div>
-                    <div className="submitContainer">
-                            <label>
-                                <input type="checkbox" checked={rememberMe} onChange={handleRememberMeChange} />
-                                Zapamiętaj mnie
-                            </label>
-
-                        <div className="submitButton">
-                            <Button onClick={() => handleSubmit()} text="Zaloguj" ></Button>
-
+                        <div className="row align-items-center">
+                            <div className="col-lg-6">
+                                <div>
+                                    <h2>Name</h2>
+                                    <input type="text" value={username} onChange={handleUsernameChange} className="inputField" />
+                                </div>
+                            </div>
+                            <div className="col-lg-6">
+                                <div>
+                                    <h2>Password</h2>
+                                    <input type="password" value={password} onChange={handlePasswordChange} className="inputField" />
+                                </div>
+                            </div>
                         </div>
 
+                        <div className="row" id="loginButtons">
+                            <div className="col-lg-2"></div>
+                            <div className="col-lg-2 p-4 mt-5">
+                                <a href="/"> &lt;Back</a>
+                            </div>
+                            <div className="col-lg-4 mt-5">
+                                <Button className="buttonRegister" onClick={() => handleSubmit()} text="Login!" />
+                            </div>
+                            <div className="col-lg-2"></div>
+                            <div className="col-lg-2"></div>
+                        </div>
+                    </div>
+                </div>
 
-                    </div>
-                    <div className="forgot">
-                        <a href="/przywroc-haslo">Zapomniałeś hasła?</a>
-                    </div>
-                </form>
             </div>
-    </div>
+        </div>
     );
 }
 

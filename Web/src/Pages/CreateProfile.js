@@ -246,11 +246,11 @@ const CreateProfile = () => {
             <div className="createProfileContainer">
                 <div className="profileContents">
                     <div className="title">
-                        <h1>Stwórz Profil</h1>
+                        <h1>Create your profile</h1>
                     </div>
                     <div className="columns">
                         <div className="stage" id="s1">
-                            <h3>1. Wybierz swoje zdjęcie</h3>
+                            <h3>1. Choose a picture</h3>
                             <input
                                 className="customInput"
                                 type="file"
@@ -269,7 +269,7 @@ const CreateProfile = () => {
                         </div>
 
                         <div className="stage" id="s2">
-                            <h3>2. Opowiedz swoją historię</h3>
+                            <h3>2. Tell your story</h3>
                             <div className="descField">
                                 <textarea name="backstory" onChange={handleChange}></textarea>
                             </div>
@@ -277,15 +277,15 @@ const CreateProfile = () => {
                     </div>
 
                     <div className="stage" id="s3">
-                        <h3>3. Pokaż swoje umiejętności</h3>
+                        <h3>3. Show your skills</h3>
                         <p>
-                            Wybierz 6 umiejętności, a nastepnie ustaw ich poziom od 0 do 100
+                            Choose 6 skills and select your experience level
                         </p>
                         <div className="statsFrame">{statDivs}</div>
                     </div>
 
                     <div className="stage" id="s3">
-                        <h3>4. Jakie są twoje ulubione gry?</h3>
+                        <h3>4. Whats your favourite games?</h3>
                         <div className="gamesFrame">{gameDivs}</div>
                     </div>
                     <div className="confirm">

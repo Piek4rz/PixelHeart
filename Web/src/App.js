@@ -1,14 +1,14 @@
 import React from 'react';
 
 import "./Components/Button/Button.css";
-import "./Components/Background/HomeBackground.css";
+import "./Components/Background/HomeBackground2.css";
 import {Route, Routes} from "react-router";
 import Home from "./Pages/Home";
 import Registration from "./Pages/Registration";
 import Login from "./Pages/Login";
 import CreateProfile from "./Pages/CreateProfile";
 import Main from "./Pages/Main";
-
+import 'bootstrap/dist/css/bootstrap-grid.min.css';
 
 const App = () => {
     return(

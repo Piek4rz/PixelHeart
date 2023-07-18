@@ -123,6 +123,11 @@ a{
 
     }
 }
+
+.clouds{
+    pointer-events: none;
+}
+
 .c1 {
     position: absolute;
     top: 10rem;

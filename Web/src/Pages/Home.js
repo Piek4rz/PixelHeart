@@ -55,11 +55,13 @@ const Home = () => {
                         <div> <Button onClick={() => handleClick('start')} text="Get Started" ></Button></div>
                     </div>
                 </div>
+
             </div>
+            <div className="clouds">
             <img className="c1" src={c1}/>
             <img className="c2" src={c2}/>
             <img className="c3" src={c3}/>
-
+            </div>
         </div>
 
     );

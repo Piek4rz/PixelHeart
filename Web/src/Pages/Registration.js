@@ -48,43 +48,63 @@ function Registration() {
         <div className="registerPage">
             <div className="registerBackground"></div>
             <div className="registerContainer">
-                <h1 className="registerText">Zarejestruj się</h1>
+                <h1 className="registerText">Register</h1>
                 <div className="registerForm">
-                    <div className="col">
-                        <div>
-                            <h2>Nazwa</h2>
-                            <input type="text" value={name} onChange={handleNameChange} className="inputField" />
+                    <div className="row">
+                        <div className="col-lg-12">
+                            <div className="row gx-5 ">
+                                <div className="col-lg-6">
+                                    <div>
+                                        <h2>Username</h2>
+                                        <input type="text" value={name} onChange={handleNameChange} className="inputField" />
+                                    </div>
+                                </div>
+                                <div className="col-lg-6">
+                                    <div>
+                                        <h2>Email</h2>
+                                        <input type="email" value={email} onChange={handleEmailChange} className="inputField" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="row gx-5 ">
+                                <div className="col-lg-6">
+                                    <div>
+                                        <h2>Password</h2>
+                                        <input type="password" value={password} onChange={handlePasswordChange} className="inputField" />
+                                    </div>
+                                </div>
+                                <div className="col-lg-6">
+                                    <div>
+                                        <h2>Comfirm Password</h2>
+                                        <input type="password" value={confirmPassword} onChange={handleConfirmPasswordChange} className="inputField" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="row gx-5 align-items-center">
+                                <div className="col-lg-6">
+                                    <h2>Age</h2>
+                                    <input type="number" value={age} onChange={handleAgeChange} className="inputFieldAge" />
+                                </div>
+                                <div className="col-lg-6 mt-5">
+                                    <input type="checkbox" id="agreement" checked={agreement} onChange={handleAgreementChange} name="agreement" />
+                                    <label htmlFor="agreement">Accept terms and conditions</label>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col-lg-2 ">
+                                </div>
+                                <div className="col-lg-2 p-4 mt-5">
+                                    <a href="/" >&lt;Back</a>
+                                </div>
+                                <div className="col-lg-4 mt-5">
+                                    <Button className="buttonRegister" onClick={() => handleSubmit()} text="Register!" ></Button>
+                                </div>
+                                <div className="col-lg-2">
+                                </div>
+                                <div className="col-lg-2">
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <h2>Email</h2>
-                            <input type="email" value={email} onChange={handleEmailChange} className="inputField" />
-                        </div>
-                    </div>
-                    <div className="col">
-                        <div>
-                            <h2>Hasło</h2>
-                            <input type="password" value={password} onChange={handlePasswordChange} className="inputField" />
-                        </div>
-                        <div>
-                            <h2>Potwierdź Hasło</h2>
-                            <input type="password" value={confirmPassword} onChange={handleConfirmPasswordChange} className="inputField" />
-                        </div>
-                    </div>
-                    <div className="col2">
-                        <div>
-                            <h2>Wiek</h2>
-                            <input type="number" value={age} onChange={handleAgeChange} className="inputFieldAge" />
-                        </div>
-                    </div>
-                    <div className="col3">
-                        <input type="checkbox" id="agreement" checked={agreement} onChange={handleAgreementChange} name="agreement" />
-                        <label htmlFor="agreement">Zgoda na warunki</label>
-                    </div>
-                    <div className="col4">
-                        <div className="back">
-                            <a href="/" >&lt;Powrót</a>
-                        </div>
-                        <Button className="buttonRegister" onClick={() => handleSubmit()} text="Zarejestruj" ></Button>
                     </div>
                 </div>
             </div>
