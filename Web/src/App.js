@@ -2,6 +2,7 @@ import React from 'react';
 
 import "./Components/Button/Button.css";
 import "./Components/Background/HomeBackground2.css";
+import "./Components/Scroll/scroll.css"
 import {Route, Routes} from "react-router";
 import Home from "./Pages/Home";
 import Registration from "./Pages/Registration";

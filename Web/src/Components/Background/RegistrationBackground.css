@@ -41,14 +41,13 @@
     background-image: url("../../Assets/bgnoise2.svg");
 }
 
-
 .registerContainer {
     overflow-x: hidden;
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
     align-items: center;
-    margin-top: 15rem;
+    margin-top: 3%;
     background-color: transparent;
 }
 
@@ -65,7 +64,7 @@
     display: flex;
     flex-wrap: wrap;
     grid-template-columns: 1fr 1fr;
-    margin: 3rem;
+    margin: 3rem 3rem 0 3rem;
     padding-bottom: 5rem;
 }
 
@@ -148,7 +147,8 @@ input[type="checkbox"]:checked::before {
     transform: scaleX(1);
 }
 
-@media screen and (max-width: 72rem) {
+
+@media screen and (max-width: 1200px) {
 
     .registerPage{
         /*background: linear-gradient(rgba(255, 255, 255, 0),white, rgba(255, 255, 255, 0));*/
@@ -175,6 +175,28 @@ input[type="checkbox"]:checked::before {
 
     .registerText{
         margin-left: 3rem;
+    }
+}
+
+@media screen and (max-width: 1024px){
+
+    .registerContainer{
+        margin-top: 3rem;
+    }
+
+    .inputField{
+        width: 15rem;
+    }
+}
+
+@media screen and (max-width: 375px){
+    .inputField{
+        width: 12rem;
+        padding: 0.5rem;
+    }
+
+    .registerContainer{
+        margin-left: 0.5rem;
     }
 }
 

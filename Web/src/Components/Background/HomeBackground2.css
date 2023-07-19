@@ -1,6 +1,5 @@
 body.home{
-    background-size: cover;
-    background: linear-gradient(#D496A0 0%, #5A69B3 100%) fixed;
+    background: linear-gradient(#D496A0 0%, #5A69B3 100% ) fixed;
     overflow-x: hidden;
 }
 
@@ -25,12 +24,36 @@ a{
     z-index: -1;
 }
 
-.landingPage{
+.scroll{
+    max-height: 100vh;
+     overflow-y: scroll;
+     scroll-snap-type: y mandatory;
+ }
 
-    margin-right: 12rem;
-    margin-left: 12rem;
+
+.landingPage{
+    min-height: 100vh;
+    padding-right: 10%;
+    padding-left: 10%;
     color: #FFFFFF;
+    scroll-snap-align: start;
+    position: relative;
+    overflow: hidden;
+
 }
+
+
+.info {
+    position: relative;
+    top: 0;
+    height: 100vh;
+    background: #2B3969FF url("../../Assets/bgnoise2.svg");
+
+    overflow-y: auto;
+    color: white;
+    font-size: 50px;
+}
+
 
 .navbar {
     display: grid;
@@ -69,7 +92,6 @@ a{
     margin-top: 15.5rem;
     display: flex;
     flex-wrap: wrap;
-
 }
 
 .text {
@@ -88,15 +110,15 @@ a{
 }
 
 
-@media screen and (max-width: 62rem) {
+@media screen and (max-width: 1024px) {
 
     .landingPage{
-        margin-left: 6rem;
-        margin-right: 6rem;
+        padding-left: 6rem;
+        padding-right: 6rem;
     }
 
     .content{
-        margin-top: 6rem;
+        margin-top: 5rem;
     }
 
     .navbar {
@@ -122,47 +144,141 @@ a{
         font-size: 2.5rem;
 
     }
+
+    .clouds{
+        position: relative;
+    }
+}
+
+@media screen and (max-width: 1440px) {
+
+    .landingPage{
+        padding-left: 3rem;
+        padding-right: 3rem;
+    }
+
+    .content{
+        margin-top: 12rem;
+    }
+
+    .left {
+        font-size: 3rem;
+    }
+
+    .right {
+        font-size: 2rem;
+        justify-content: center;
+        margin-top: 1rem;
+    }
+
+    .headline{
+        font-size: 5rem;
+    }
+
+    .bottomText{
+        font-size: 2.5rem;
+
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .landingPage{
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .content{
+        margin-top: 4rem;
+    }
+
+    .left {
+        font-size: 2rem;
+    }
+
+    .right {
+        font-size: 1rem;
+        justify-content: center;
+        margin-top: 1rem;
+    }
+
+    .headline{
+        font-size: 5rem;
+    }
+
+    .bottomText{
+        font-size: 2.5rem;
+
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .headline{
+        font-size: 4rem;
+    }
+
+    .bottomText{
+        font-size: 2rem;
+
+    }
 }
 
 .clouds{
+    overflow: hidden;
     pointer-events: none;
 }
 
 .c1 {
+    z-index: 1;
     position: absolute;
-    top: 10rem;
-    left: -200px; /* Początkowa pozycja chmury poza lewą krawędzią ekranu */
+    top: 15%;
+    left: 0;
     animation: moveCloud1 40s linear infinite, move-up-down 2s ease infinite; /* Użyjmy animacji o nazwie "moveCloud" */
 }
 @keyframes moveCloud1 {
     0% {
-        left: -200px; /* Początkowa pozycja chmury poza lewą krawędzią ekranu */
+        opacity: 0;
+        left: 0; /* Początkowa pozycja chmury poza lewą krawędzią ekranu */
+    }
+    10%{
+        opacity: 1;
+    }
+    90%{
+        opacity: 1;
     }
     100% {
-        left: calc(100% + 200px); /* Końcowa pozycja chmury poza prawą krawędzią ekranu */
+        left: calc(100% - 300px); /* Końcowa pozycja chmury poza prawą krawędzią ekranu */
+        opacity: 0;
     }
 }
 
 .c2 {
     position: absolute;
-    top: 55rem;
+    top: 70%;
     right: -200px; /* Początkowa pozycja chmury poza lewą krawędzią ekranu */
     animation: moveCloud2 30s linear infinite, move-up-down 5s ease infinite; /* Użyjmy animacji o nazwie "moveCloud" */
     overflow: hidden;
 }
 @keyframes moveCloud2 {
     0% {
-        right: -200px; /* Początkowa pozycja chmury poza lewą krawędzią ekranu */
+        right: 0; /* Początkowa pozycja chmury poza lewą krawędzią ekranu */
+        opacity: 0;
+    }
+    10%{
+        opacity: 1;
+    }
+    90%{
+        opacity: 1;
     }
     100% {
-        right: calc(100% + 200px); /* Końcowa pozycja chmury poza prawą krawędzią ekranu */
+        right: calc(100% - 300px); /* Końcowa pozycja chmury poza prawą krawędzią ekranu */
+        opacity: 0;
     }
 }
 
 .c3 {
     position: absolute;
-    top: 35rem;
-    left: -200px; /* Początkowa pozycja chmury poza lewą krawędzią ekranu */
+    top: 60%;
+    left: 0; /* Początkowa pozycja chmury poza lewą krawędzią ekranu */
     animation: moveCloud1 35s linear infinite, move-up-down 4s ease infinite; /* Użyjmy animacji o nazwie "moveCloud" */
 }
 
@@ -177,3 +293,58 @@ a{
         transform: translateY(0);
     }
 }
+
+span
+{
+    position: absolute;
+    right: -600px;
+    transform: translateY(-50%);
+    width: 300px;
+    height: 1px;
+    background: linear-gradient(90deg, #fff, transparent);
+    -webkit-animation-duration: 5s;
+    -webkit-animation-delay: 15s;
+    animation: star 28s linear infinite;
+}
+
+@keyframes star{
+    0%{
+        transform: rotate(315deg) translateX(0);
+        opacity: 0;
+    }
+    1%{
+        opacity: 1;
+    }
+    10%{
+        transform: rotate(315deg) translateX(-120vh);
+    }
+    11%{
+        opacity: 0;
+    }
+    100%{
+        transform: rotate(315deg) translateX(-120vh);
+        opacity: 0;
+    }
+}
+
+
+
+span:nth-child(2)
+{
+    right: 100px;
+    animation-delay: 12s;
+}
+
+span:nth-child(3)
+{
+    right: 400px;
+    animation-delay: 17s;
+}
+span:nth-child(4)
+{
+    right: 700px;
+    animation-delay: 21s;
+}
+
+
+
