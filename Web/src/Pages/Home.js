@@ -41,7 +41,7 @@ const Home = () => {
               <a href="strona_about_us.html">
                 <div>About Us</div>
               </a>
-              <a href="login">
+              <a href="" onClick={() => handleClick("continue")}>
                 <div>Login</div>
               </a>
               {/*<div> <Button onClick={() => handleClick()} text="Login" ></Button></div>*/}

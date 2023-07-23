@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import "../Components/Background/LoginBackground.css"
 import Button from "../Components/Button/Button";
+import {useNavigate} from "react-router-dom";
 
 
 
@@ -8,6 +9,15 @@ const Login = () =>{
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [rememberMe, setRememberMe] = useState(false);
+
+    const navigate = useNavigate();
+
+    const handleClick = (buttonType) => {
+      if (buttonType === "back")   {
+          navigate("/");
+          document.body.classList.remove("login");
+      }
+    };
 
     const handleUsernameChange = (event) => {
         setUsername(event.target.value);
@@ -54,7 +64,7 @@ const Login = () =>{
                         <div className="row" id="loginButtons">
                             <div className="col-lg-2"></div>
                             <div className="col-lg-2 p-4 mt-5">
-                                <a href="/"> &lt;Back</a>
+                                <a href="" onClick={() => handleClick("back")}> &lt;Back</a>
                             </div>
                             <div className="col-lg-4 mt-5">
                                 <Button className="buttonRegister" onClick={() => handleSubmit()} text="Login!" />

@@ -14,6 +14,12 @@ function Registration() {
     const [age, setAge] = useState('');
     const [agreement, setAgreement] = useState(false);
 
+    const handleClick = (buttonType) => {
+        if (buttonType === "back")   {
+            navigate("/");
+            document.body.classList.remove("register");
+        }
+    };
     const handleNameChange = (event) => {
         setName(event.target.value);
     };
@@ -94,7 +100,7 @@ function Registration() {
                                 <div className="col-lg-2 ">
                                 </div>
                                 <div className="col-lg-2 p-4 mt-5">
-                                    <a href="/" >&lt;Back</a>
+                                    <a href="" onClick={() => handleClick("back")}>&lt;Back</a>
                                 </div>
                                 <div className="col-lg-4 mt-5">
                                     <Button className="buttonRegister" onClick={() => handleSubmit()} text="Register!" ></Button>
